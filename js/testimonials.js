@@ -1,175 +1,21 @@
-const achievements = [
-  {
-    videoSrc: "videos/testimonials/video1.mp4",
-    caption:
-      "Delighted to see 3 of my clients, Jasper, Harper and Winter take home awards and some well deserved doggie treats 🏆 🥇",
-  },
-  {
-    videoSrc: "videos/testimonials/video2.mp4",
-    caption:
-      "Good time to talk about and demonstrate the importance of positive dog training 🙌🏼🐶",
-  },
-  {
-    videoSrc: "videos/testimonials/video3.mp4",
-    caption:
-      "I love this trick, it lasts longer if you freeze the spoon.. 🥄 Peanut butter can be a great treat as part of a healthy diet. 🐶 🐕",
-  },
-  {
-    videoSrc: "videos/testimonials/video4.mp4",
-    caption:
-      "Got a new pup? 🐶 watch to learn some simple techniques to engage with your new furry pal.",
-  },
-  {
-    videoSrc: "videos/testimonials/video5.mp4",
-    caption:
-      "Labradors are a family favourite, friendly, outgoing and high spirited.",
-  },
-  {
-    videoSrc: "videos/testimonials/video6.mp4",
-    caption: "Triggers first walkies🐾. Great result from the first session 🙌🏼",
-  },
-];
-
-const testimonials = [
-  {
-    id: "1",
-    imageTestimonial: "images/testimonials/1.1.jpg",
-    altTestimonial: "The customer testimonial 1",
-    imagePet: "images/testimonials/1.2.jpg",
-    altPet: "The pet that this testimonials is about",
-  },
-  {
-    id: "2",
-    imageTestimonial: "images/testimonials/2.1.jpg",
-    altTestimonial: "The customer testimonial 2",
-    imagePet: "images/testimonials/2.2.jpg",
-    altPet: "The pet that this testimonials is about",
-  },
-  {
-    id: "3",
-    imageTestimonial: "images/testimonials/3.1.jpg",
-    altTestimonial: "The customer testimonial 3",
-    imagePet: "images/testimonials/3.2.jpg",
-    altPet: "The pet that this testimonial is about",
-  },
-  {
-    id: "4",
-    imageTestimonial: "images/testimonials/4.1.jpg",
-    altTestimonial: "The customer testimonial 4",
-    imagePet: "images/testimonials/4.2.jpg",
-    altPet: "The pet that this testimonial is about",
-  },
-  {
-    id: "5",
-    imageTestimonial: "images/testimonials/5.1.jpg",
-    altTestimonial: "The customer testimonial 5",
-    imagePet: "images/testimonials/5.2.jpg",
-    altPet: "The pet that this testimonial is about",
-  },
-  {
-    id: "6",
-    imageTestimonial: "images/testimonials/6.1.jpg",
-    altTestimonial: "The customer testimonial 6",
-    imagePet: "images/testimonials/6.2.jpg",
-    altPet: "The pet that this testimonial is about",
-  },
-  {
-    id: "7",
-    imageTestimonial: "images/testimonials/7.1.jpg",
-    altTestimonial: "The customer testimonial 7",
-    imagePet: "images/testimonials/7.2.jpg",
-    altPet: "The pet that this testimonial is about",
-  },
-  {
-    id: "8",
-    imageTestimonial: "images/testimonials/8.1.jpg",
-    altTestimonial: "The customer testimonial 8",
-    imagePet: "images/testimonials/8.2.jpg",
-    altPet: "The pet that this testimonial is about",
-  },
-  {
-    id: "9",
-    imageTestimonial: "images/testimonials/9.1.jpg",
-    altTestimonial: "The customer testimonial 9",
-    imagePet: "images/testimonials/9.2.jpg",
-    altPet: "The pet that this testimonial is about",
-  },
-  {
-    id: "10",
-    imageTestimonial: "images/testimonials/10.1.jpg",
-    altTestimonial: "The customer testimonial 10",
-    imagePet: "images/testimonials/10.2.jpg",
-    altPet: "The pet that this testimonial is about",
-  },
-  {
-    id: "11",
-    imageTestimonial: "images/testimonials/11.1.jpg",
-    altTestimonial: "The customer testimonial 11",
-    imagePet: "images/testimonials/11.2.jpg",
-    altPet: "The pet that this testimonial is about",
-  },
-  {
-    id: "12",
-    imageTestimonial: "images/testimonials/12.1.jpg",
-    altTestimonial: "The customer testimonial 12",
-    imagePet: "images/testimonials/12.2.jpg",
-    altPet: "The pet that this testimonial is about",
-  },
-  {
-    id: "13",
-    imageTestimonial: "images/testimonials/13.1.jpg",
-    altTestimonial: "The customer testimonial 13",
-    imagePet: "images/testimonials/13.2.jpg",
-    altPet: "The pet that this testimonial is about",
-  },
-  {
-    id: "14",
-    imageTestimonial: "images/testimonials/14.1.jpg",
-    altTestimonial: "The customer testimonial 14",
-    imagePet: "images/testimonials/14.2.jpg",
-    altPet: "The pet that this testimonial is about",
-  },
-  {
-    id: "15",
-    imageTestimonial: "images/testimonials/15.1.jpg",
-    altTestimonial: "The customer testimonial 15",
-    imagePet: "images/testimonials/15.2.jpg",
-    altPet: "The pet that this testimonial is about",
-  },
-  {
-    id: "16",
-    imageTestimonial: "images/testimonials/16.1.jpg",
-    altTestimonial: "The customer testimonial 16",
-    imagePet: "images/testimonials/16.2.jpg",
-    altPet: "The pet that this testimonial is about",
-  },
-  {
-    id: "17",
-    imageTestimonial: "images/testimonials/17.1.jpg",
-    altTestimonial: "The customer testimonial 17",
-    imagePet: "images/testimonials/17.2.jpg",
-    altPet: "The pet that this testimonial is about",
-  },
-  {
-    id: "18",
-    imageTestimonial: "images/testimonials/18.1.jpg",
-    altTestimonial: "The customer testimonial 18",
-    imagePet: "images/testimonials/18.2.jpg",
-    altPet: "The pet that this testimonial is about",
-  },
-];
-
 // use data and creating list of testimonials
 $(document).ready(function () {
-  // render achievements
-  renderAchievements(achievements);
-  // render testimonials
-  renderTestimonials(testimonials);
-  // random picture for .testim-container
-  new RandomImageGenerator(
-    ["images/main/paw-paw-blue.png", "images/main/paw-paw-red.png"],
-    ".testim-container"
-  );
+  // Fetch achievements and testimonials data from the JSON file
+  fetch("testimonials.json")
+    .then((response) => response.json())
+    .then((data) => {
+      // Render achievements using the loaded data
+      renderAchievements(data.achievements);
+
+      // Render testimonials using the loaded data
+      renderTestimonials(data.testimonials);
+      // random picture for .testim-container
+      new RandomImageGenerator(
+        ["images/main/paw-paw-blue.png", "images/main/paw-paw-red.png"],
+        ".testim-container"
+      );
+    })
+    .catch((error) => console.error("Error fetching JSON:", error));
 });
 
 // Function for creating the list of achievements
