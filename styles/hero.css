@@ -1,0 +1,51 @@
+#hero {
+  position: relative;
+  background-image: url(/images/home.webp);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+  margin: 0 auto;
+  overflow: hidden;
+  z-index: 0;
+}
+
+#hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(14, 26, 36, 0.1);
+  z-index: 1;
+}
+
+.hero-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 28vh 1.5vh 1.5vh 1.5vh;
+}
+
+.hero-title,
+.hero-text {
+  position: relative;
+  z-index: 2;
+  color: var(--white-text-color);
+  margin: 0 12px;
+}
+
+.hero-title {
+  font-weight: bold;
+  font-size: 3rem;
+  text-transform: uppercase;
+  letter-spacing: 2.4px;
+  text-shadow: 1px -1px 0 rgba(230, 236, 240, 0.5),
+    2px -2px 0 rgba(255, 255, 255, 0.5);
+}
+
+.hero-text {
+  font-size: 1.8rem;
+  color: var(--white-text-color);
+  margin-top: 8px;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+}
