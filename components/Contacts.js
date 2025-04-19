@@ -13,6 +13,7 @@ export default function Contacts() {
 
   const [errors, setErrors] = useState({});
   const [submitted, setSubmitted] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   const validations = {
     name: (value) => value.trim() !== "",
@@ -95,27 +96,33 @@ export default function Contacts() {
     );
 
     const isFormValid = fieldValidations.every(Boolean);
-
     if (!isFormValid) return;
 
-    const res = await fetch("/api/send-email", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(formData),
-    });
-
-    if (res.ok) {
-      setSubmitted(true);
-      setFormData({
-        name: "",
-        email: "",
-        phone: "",
-        location: "",
-        message: "",
+    try {
+      const res = await fetch("/api/send-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
       });
-      setErrors({});
-    } else {
+
+      if (res.ok) {
+        setSubmitted(true);
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          location: "",
+          message: "",
+        });
+      } else {
+        setSubmitted(false);
+      }
+
+      setShowModal(true);
+    } catch (error) {
       setSubmitted(false);
+      setShowModal(true);
+      console.error("Error sending message:", error);
     }
   };
 
@@ -211,7 +218,7 @@ export default function Contacts() {
         </form>
 
         {/* Modal */}
-        {submitted !== null && (
+        {showModal && (
           <div className="submit-modal fixed inset-0 flex items-center justify-center bg-opacity-50 z-50">
             <div className="bg-[var(--light-background)] rounded-xl p-6 max-w-sm w-full text-center shadow-xl">
               <p
@@ -226,7 +233,7 @@ export default function Contacts() {
                   : "Oops! Something went wrong. Please try again later."}
               </p>
               <button
-                onClick={() => setSubmitted(null)}
+                onClick={() => setShowModal(false)}
                 className="mt-4 bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-2 px-4 rounded"
               >
                 Close
