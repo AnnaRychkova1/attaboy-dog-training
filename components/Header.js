@@ -37,7 +37,7 @@ export default function Header() {
 
         {/* Desktop Nav */}
         <nav className="hidden md:flex gap-6 text-lg font-medium">
-          <NavLink href="#home" text="Home" />
+          <NavLink href="#hero" text="Home" />
           <NavLink href="#about" text="About" />
           <NavLink href="#services" text="Services" />
           <NavLink href="#testimonials" text="Testimonials" />
@@ -70,7 +70,7 @@ export default function Header() {
       {isMobileMenuOpen && (
         <div className="md:hidden px-4 pb-4">
           <ul className="flex flex-col gap-2 text-base font-medium items-end">
-            <NavItem href="#home" text="Home" />
+            <NavItem href="#hero" text="Home" />
             <NavItem href="#about" text="About" />
             <NavItem href="#services" text="Services" />
             <NavItem href="#testimonials" text="Testimonials" />

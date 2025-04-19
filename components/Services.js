@@ -36,7 +36,7 @@ export default function Services() {
                 <p className="services-text services-text-br">
                   The course will cover:
                 </p>
-                <ul className="service-sublist">
+                <ul className="service-sublist list-disc ml-6 mb-3">
                   <li>Focus & Attention</li>
                   <li>Toilet training</li>
                   <li>Crate training</li>
@@ -72,7 +72,7 @@ export default function Services() {
                 <p className="services-text services-text-br">
                   The course will cover:
                 </p>
-                <ul className="service-sublist">
+                <ul className="service-sublist list-disc ml-6 mb-3">
                   <li>Teaching proper leash manners and loose-lead walking.</li>
                   <li>
                     Reliable recall techniques for better off&ndash;lead
@@ -113,7 +113,7 @@ export default function Services() {
                 <p className="services-text services-text-br">
                   The course will cover:
                 </p>
-                <ul className="service-sublist">
+                <ul className="service-sublist list-disc ml-6 mb-3">
                   <li>
                     In&ndash;depth assessments to get to the root of the
                     problem.
