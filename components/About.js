@@ -17,6 +17,14 @@ export default function About() {
                 />
               </picture>
             </figure>
+            <Image
+              src="/paw-paw.png"
+              alt="Mattias with paw"
+              className="about-paw-img"
+              loading="lazy"
+              width={160}
+              height={300}
+            />
           </div>
           <div className="about-right">
             <h2 className="about-title text-3xl font-bold">
@@ -48,17 +56,9 @@ export default function About() {
             </p>
           </div>
         </div>
-        <a href="#contacts" className="anhor-link">
+        <a href="#contacts" className="anhor-link h-10">
           <button className="anhor-btn">Contact</button>
         </a>
-        <Image
-          src="/paw-paw.png"
-          alt="Mattias with paw"
-          className="about-paw-img"
-          loading="lazy"
-          width={160}
-          height={300}
-        />
       </div>
     </section>
   );

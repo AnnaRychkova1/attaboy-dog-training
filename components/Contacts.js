@@ -210,7 +210,7 @@ export default function Contacts() {
               onChange={handleChange}
             />
           </div>
-          <a className="anhor-link">
+          <a className="anhor-link h-10">
             <button type="submit" className="anhor-btn">
               Send
             </button>

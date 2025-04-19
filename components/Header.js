@@ -47,11 +47,11 @@ export default function Header() {
         {/* Mobile Toggle */}
         <button
           onClick={() => setIsMobileMenuMenuOpen(!isMobileMenuOpen)}
-          className="md:hidden text-gray-700 focus:outline-none"
+          className="md:hidden text-[var(--accent-color)] focus:outline-none px-4"
           aria-label="Toggle navigation"
         >
           <svg
-            className="w-6 h-6"
+            className="w-9 h-10"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -82,7 +82,6 @@ export default function Header() {
   );
 }
 
-// Компоненти лінків
 function NavLink({ href, text }) {
   return (
     <li className="list-none">
@@ -101,7 +100,7 @@ function NavItem({ href, text }) {
     <li className="list-none">
       <a
         href={href}
-        className="block px-4 py-2 rounded-full hover:bg-gray-100 transition"
+        className="block px-4 py-2 rounded-full hover:text-[var(--accent-color)] hover:drop-shadow-[0_2px_4px_rgba(246,92,115,0.7)] transition"
       >
         {text}
       </a>

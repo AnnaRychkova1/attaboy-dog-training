@@ -1,12 +1,5 @@
 .about-container {
-  position: relative;
   padding: 0 1.5rem;
-}
-
-.about-paw-img {
-  position: absolute;
-  bottom: 46%;
-  left: 0;
 }
 
 .about-wrapper {
@@ -20,6 +13,16 @@ picture {
 
 .about-img {
   border-radius: 24px;
+}
+
+.about-left {
+  position: relative;
+}
+
+.about-paw-img {
+  position: absolute;
+  bottom: 0;
+  left: 0;
 }
 
 .about-left,
@@ -50,11 +53,6 @@ picture {
 
 /* @media screen and (min-width: 768px) { */
 @media screen and (min-width: 1024px) {
-  .about-paw-img {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-  }
   .about-wrapper {
     flex-direction: row;
     align-items: stretch;

@@ -4,7 +4,7 @@ export default function Services() {
       <section id="services">
         <div className="container services-container">
           <h2 className="services-title">Services</h2>
-          <a href="#contacts" className="anhor-link">
+          <a href="#contacts" className="anhor-link h-10">
             <button className="anhor-btn">Book Now</button>
           </a>
         </div>

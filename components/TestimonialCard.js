@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-export default function TestimonialCard({ name, text, image }) {
+export default function TestimonialCard({ name, message, image }) {
   return (
     <>
       <Image
@@ -11,7 +11,7 @@ export default function TestimonialCard({ name, text, image }) {
         className="testimonial-img mx-auto rounded-full mb-4"
         loading="lazy"
       />
-      <p className="testimonial-text">{text}</p>
+      <p className="testimonial-text">{message}</p>
       <p className="font-semibold text-xl text-[var(--accent-color)] mt-4 text-center">
         {name || "Grateful Customer"}
       </p>

@@ -37,7 +37,8 @@
 }
 
 .testimonial-info {
-  padding: 0.5rem;
+  /* padding: 0.5rem; */
+  padding-top: 2.5rem;
   padding-bottom: 2.5rem;
 }
 
@@ -51,10 +52,16 @@
   text-align: center;
   font-size: medium;
   font-family: DM Sans, sans-serif;
+  padding: 1.25rem;
+}
+
+.testimonial-modal {
+  background-color: rgba(95, 131, 166, 0.8);
 }
 
 .swiper {
-  padding: 2.4rem !important;
+  padding-left: 1.25rem !important;
+  padding-right: 1.25rem !important;
 }
 
 .swiper-button-prev,
