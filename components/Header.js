@@ -30,7 +30,7 @@ export default function Header() {
             alt="Logo Attaboy Dog Training"
             width={160}
             height={160}
-            className="h-16 w-auto"
+            className="h-22 w-22 md:w-26 md:h-26"
             loading="lazy"
           />
         </a>

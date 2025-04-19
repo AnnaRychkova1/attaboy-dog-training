@@ -4,7 +4,6 @@
 @import "./services.css";
 @import "./testimonials.css";
 @import "./contacts.css";
-@import "./header-footer.css";
 
 :root {
   --light-background: #fffced;
