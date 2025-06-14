@@ -19,24 +19,24 @@ export default function Header() {
 
   return (
     <header
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-transparent  ${
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-transparent ${
         isBlurred ? "backdrop-blur-md shadow-md" : ""
       }`}
     >
-      <div className="container mx-auto flex justify-between items-center px-4 py-2">
+      <div className="container mx-auto flex justify-between items-center px-4 py-2 lg:px-8">
         <a href="#home" className="flex-shrink-0">
           <Image
             src="/logo.png"
             alt="Logo Attaboy Dog Training"
             width={160}
             height={160}
-            className="h-22 w-22 md:w-26 md:h-26"
+            className="h-22 w-22"
             loading="lazy"
           />
         </a>
 
         {/* Desktop Nav */}
-        <nav className="hidden md:flex gap-6 text-lg font-medium">
+        <nav className="hidden md:flex gap-6 text-lg 2xl:text-2xl font-medium">
           <NavLink href="#hero" text="Home" />
           <NavLink href="#about" text="About" />
           <NavLink href="#services" text="Services" />
@@ -69,12 +69,12 @@ export default function Header() {
       {/* Mobile Nav */}
       {isMobileMenuOpen && (
         <div className="md:hidden px-4 pb-4">
-          <ul className="flex flex-col gap-2 text-base font-medium items-end">
-            <NavItem href="#hero" text="Home" />
-            <NavItem href="#about" text="About" />
-            <NavItem href="#services" text="Services" />
-            <NavItem href="#testimonials" text="Testimonials" />
-            <NavItem href="#contacts" text="Contacts" />
+          <ul className="flex flex-col gap-2 text-lg font-medium items-end">
+            <NavLink href="#hero" text="Home" isMobile />
+            <NavLink href="#about" text="About" isMobile />
+            <NavLink href="#services" text="Services" isMobile />
+            <NavLink href="#testimonials" text="Testimonials" isMobile />
+            <NavLink href="#contacts" text="Contacts" isMobile />
           </ul>
         </div>
       )}
@@ -82,25 +82,14 @@ export default function Header() {
   );
 }
 
-function NavLink({ href, text }) {
+function NavLink({ href, text, isMobile = false }) {
   return (
     <li className="list-none">
       <a
         href={href}
-        className="px-4 py-2 rounded-full hover:text-[var(--accent-color)] hover:drop-shadow-[0_2px_4px_rgba(246,92,115,0.7)] transition"
-      >
-        {text}
-      </a>
-    </li>
-  );
-}
-
-function NavItem({ href, text }) {
-  return (
-    <li className="list-none">
-      <a
-        href={href}
-        className="block px-4 py-2 rounded-full hover:text-[var(--accent-color)] hover:drop-shadow-[0_2px_4px_rgba(246,92,115,0.7)] transition"
+        className={`px-4 py-2 rounded-full hover:text-[var(--accent-color)] hover:drop-shadow-[0_2px_4px_rgba(246,92,115,0.7)] transition ${
+          isMobile ? "block" : ""
+        }`}
       >
         {text}
       </a>

@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 export default function About() {
   return (
     <section id="about" className="pt-16 pb-8">
@@ -17,14 +15,6 @@ export default function About() {
                 />
               </picture>
             </figure>
-            <Image
-              src="/paw-paw.png"
-              alt="Mattias with paw"
-              className="about-paw-img"
-              loading="lazy"
-              width={160}
-              height={300}
-            />
           </div>
           <div className="about-right">
             <h2 className="about-title text-3xl font-bold">
@@ -46,7 +36,7 @@ export default function About() {
               animal shelters across the city, gaining valuable hands-on
               experience with dogs of all shapes, sizes, and temperaments.
             </p>
-            <p className="about-text">
+            <p className="about-text about-text-last">
               After years of education and experience abroad, I returned to
               Ireland to set up my own dog training venture. My goal is to offer
               personalised, compassionate, and effective training that helps

@@ -49,3 +49,9 @@
   margin-top: 8px;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
 }
+
+@media screen and (min-width: 1536px) {
+  .hero-text {
+    font-size: 2rem;
+  }
+}

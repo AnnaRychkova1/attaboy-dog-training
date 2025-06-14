@@ -63,17 +63,16 @@
 .services-subtitle {
   font-weight: bold;
   font-size: 2rem;
-  margin-bottom: 1rem;
 }
 
 .services-text,
 .service-sublist {
-  font-size: medium;
+  font-size: large;
   font-family: DM Sans, sans-serif;
 }
 
 .services-text-br {
-  font-size: large;
+  font-size: larger;
   margin-top: 12px;
 }
 
@@ -96,5 +95,16 @@
 
   .service-item {
     width: calc(100% / 3 - 1.25rem);
+  }
+}
+
+@media screen and (min-width: 1536px) {
+  .services-text,
+  .service-sublist {
+    font-size: 1.5rem;
+  }
+
+  .services-text-br {
+    font-size: 1.6rem;
   }
 }

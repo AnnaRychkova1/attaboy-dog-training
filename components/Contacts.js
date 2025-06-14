@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState, useEffect } from "react";
 
 export default function Contacts() {
   const [formData, setFormData] = useState({
@@ -99,7 +99,7 @@ export default function Contacts() {
     if (!isFormValid) return;
 
     try {
-      const res = await fetch("/api/send-email", {
+      const res = await fetch("/api/contacts", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
@@ -126,25 +126,37 @@ export default function Contacts() {
     }
   };
 
+  const ref = useRef(null);
+
+  useEffect(() => {
+    if (ref.current) {
+      ref.current.style.height = "auto";
+      ref.current.style.height = ref.current.scrollHeight + "px";
+    }
+  }, [formData.message]);
+
   return (
     <section id="contacts">
       <div className="container">
         <h2 className="contact-title">Contact</h2>
-
-        <form className="form" onSubmit={handleSubmit} noValidate>
-          <div className="field-container relative">
-            <label htmlFor="name">
+        <form onSubmit={handleSubmit} noValidate className="form">
+          {/* Name Field */}
+          <div className="relative field-container">
+            <label htmlFor="name" className="text-2xl label-shadow">
               Name<span className="text-red-500"> *</span>
             </label>
             <input
-              type="text"
+              id="name"
               name="name"
+              type="text"
               placeholder="Your name"
               className={`input w-full ${errors.name ? "invalid" : ""}`}
               value={formData.name}
               onChange={handleChange}
               onBlur={handleBlur}
               required
+              //aria-invalid={!!errors.name}
+              //aria-describedby={errors.name ? "name-error" : undefined}
             />
             {errors.name && (
               <p className="absolute bottom-[-20px] left-0 text-red-500 text-base">
@@ -152,16 +164,23 @@ export default function Contacts() {
               </p>
             )}
           </div>
+
+          {/* Email Field */}
           <div className="field-container relative">
-            <label htmlFor="email">Email</label>
+            <label htmlFor="email" className="text-2xl label-shadow">
+              Email
+            </label>
             <input
-              type="email"
+              id="email"
               name="email"
+              type="email"
               placeholder="Your email"
               className={`input w-full ${errors.email ? "invalid" : ""}`}
               value={formData.email}
               onChange={handleChange}
               onBlur={handleBlur}
+              //aria-invalid={!!errors.email}
+              //aria-describedby={errors.email ? "email-error" : undefined}
             />
             {errors.email && (
               <p className="absolute bottom-[-20px] left-0 text-red-500 text-base">
@@ -169,19 +188,24 @@ export default function Contacts() {
               </p>
             )}
           </div>
+
+          {/* Phone Field */}
           <div className="field-container relative">
-            <label htmlFor="phone">
+            <label htmlFor="phone" className="text-2xl label-shadow">
               Phone number<span className="text-red-500"> *</span>
             </label>
             <input
-              type="tel"
+              id="phone"
               name="phone"
+              type="tel"
               placeholder="Phone number"
               className={`input w-full ${errors.phone ? "invalid" : ""}`}
               value={formData.phone}
               onChange={handleChange}
               onBlur={handleBlur}
               required
+              //aria-invalid={!!errors.phone}
+              //aria-describedby={errors.phone ? "phone-error" : undefined}
             />
             {errors.phone && (
               <p className="absolute bottom-[-20px] left-0 text-red-500 text-base">
@@ -189,32 +213,46 @@ export default function Contacts() {
               </p>
             )}
           </div>
+
+          {/* Location Field */}
           <div className="field-container">
-            <label htmlFor="location">Location</label>
+            <label htmlFor="location" className="text-2xl label-shadow">
+              Location
+            </label>
             <input
-              type="text"
+              id="location"
               name="location"
+              type="text"
               placeholder="Location"
-              className="input w-full"
+              className="input w-full mt-1"
               value={formData.location}
               onChange={handleChange}
             />
           </div>
+
+          {/* Message Field */}
           <div className="field-container">
-            <label htmlFor="message">How can I help?</label>
+            <label htmlFor="message" className="text-2xl label-shadow">
+              How can I help?
+            </label>
             <textarea
+              id="message"
               name="message"
               placeholder="Your message"
-              className="input w-full min-h-[120px]"
+              className="input w-full min-h-[120px] mt-1 overflow-hidden resize-none"
+              ref={ref}
               value={formData.message}
               onChange={handleChange}
             />
           </div>
+
+          {/* Submit Button */}
           <a className="anhor-link h-10">
             <button type="submit" className="anhor-btn">
               Send
             </button>
           </a>
+          {/* </div> */}
         </form>
 
         {/* Modal */}
