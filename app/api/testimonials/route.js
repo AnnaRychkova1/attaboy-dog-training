@@ -17,21 +17,51 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
+// export async function GET() {
+//   try {
+//     const { data: testimonials, error } = await supabase
+//       .from("testimonials")
+//       .select("*")
+//       .order("createdAt", { ascending: false });
+
+//     if (error) {
+//       console.error("GET testimonials error:", error);
+//       return NextResponse.json({ error: "Server error" }, { status: 500 });
+//     }
+
+//     return NextResponse.json(testimonials);
+//   } catch (error) {
+//     console.error("GET testimonials error:", error);
+//     return NextResponse.json({ error: "Server error" }, { status: 500 });
+//   }
+// }
+
 export async function GET() {
   try {
+    console.log("Starting GET /api/testimonials");
+
+    if (!process.env.SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) {
+      console.error("Missing Supabase environment variables!");
+      return NextResponse.json(
+        { error: "Server config error" },
+        { status: 500 }
+      );
+    }
+
     const { data: testimonials, error } = await supabase
       .from("testimonials")
       .select("*")
       .order("createdAt", { ascending: false });
 
     if (error) {
-      console.error("GET testimonials error:", error);
+      console.error("GET testimonials Supabase error:", error);
       return NextResponse.json({ error: "Server error" }, { status: 500 });
     }
 
+    console.log("GET testimonials success:", testimonials.length, "items");
     return NextResponse.json(testimonials);
   } catch (error) {
-    console.error("GET testimonials error:", error);
+    console.error("GET testimonials unexpected error:", error);
     return NextResponse.json({ error: "Server error" }, { status: 500 });
   }
 }
