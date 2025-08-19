@@ -1,47 +1,13 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { getCookie, setCookie, deleteCookie } from "cookies-next";
 import AdminDashboard from "@/components/AdminDashboard";
 
 export default function AdminPage() {
   const [authenticated, setAuthenticated] = useState(false);
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-
-  // useEffect(() => {
-  //   const authCookie = getCookie("adminAuthenticated");
-  //   if (authCookie === "true") setAuthenticated(true);
-  // }, []);
-
-  // const handleLogout = () => {
-  //   setAuthenticated(false);
-  //   deleteCookie("adminAuthenticated");
-  // };
-
-  // const handleLogin = async () => {
-  //   setLoading(true);
-  //   try {
-  //     const res = await fetch("/api/admin/login", {
-  //       method: "POST",
-  //       headers: { "Content-Type": "application/json" },
-  //       body: JSON.stringify({ password }),
-  //     });
-
-  //     const result = await res.json();
-  //     if (result.success) {
-  //       setAuthenticated(true);
-  //       setCookie("adminAuthenticated", "true", { maxAge: 60 * 60 * 24 }); // 1 day
-  //     } else {
-  //       alert("Incorrect password");
-  //     }
-  //   } catch (err) {
-  //     console.error("Login error:", err);
-  //     alert("Something went wrong");
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
+  const [error, setError] = useState("");
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -57,12 +23,17 @@ export default function AdminPage() {
   }, []);
 
   const handleLogout = async () => {
-    await fetch("/api/admin/logout", { method: "POST" });
-    setAuthenticated(false);
+    try {
+      await fetch("/api/admin/logout", { method: "POST" });
+      setAuthenticated(false);
+    } catch (err) {
+      console.error("Logout error:", err);
+    }
   };
 
   const handleLogin = async () => {
     setLoading(true);
+    setError("");
     try {
       const res = await fetch("/api/admin/login", {
         method: "POST",
@@ -74,16 +45,15 @@ export default function AdminPage() {
       if (result.success) {
         setAuthenticated(true);
       } else {
-        alert("Incorrect password");
+        setError("Incorrect password");
       }
     } catch (err) {
       console.error("Login error:", err);
-      alert("Something went wrong");
+      setError("Something went wrong, try again");
     } finally {
       setLoading(false);
     }
   };
-
   if (!authenticated) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-[var(--light-background)] opacity-80">
@@ -99,25 +69,38 @@ export default function AdminPage() {
             className="space-y-6"
             noValidate
           >
-            <label htmlFor="admin-password" className="sr-only">
-              Admin password
-            </label>
-            <input
-              id="admin-password"
-              name="password"
-              type="password"
-              placeholder="Enter admin password"
-              className="w-full border px-3 py-2 rounded bg-[var(--white-text-color)] shadow-[inset_0_2px_20px_rgba(101,197,242,0.3)] text-[var(--blue-text-color)] placeholder:text-[var(--blue-text-color)] transition focus:outline-none hover:bg-[rgba(255,255,255,0.8)] focus:bg-[rgba(255,255,255,0.8)]"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              aria-required="true"
-            />
-            <div className="h-10 flex justify-center items-center">
+            <div className="relative mb-8">
+              {" "}
+              <label htmlFor="admin-password" className="sr-only">
+                Admin password
+              </label>
+              <input
+                id="admin-password"
+                name="password"
+                type="password"
+                placeholder="Enter admin password"
+                className={`w-full px-3 py-2 rounded bg-[var(--white-text-color)] shadow-[inset_0_2px_20px_rgba(101,197,242,0.3)] text-[var(--blue-text-color)] placeholder:text-[var(--blue-text-color)] transition focus:outline-none hover:bg-[rgba(255,255,255,0.8)] focus:bg-[rgba(255,255,255,0.8)] ${
+                  error ? "border-2 border-red-500" : "border border-gray-300"
+                }`}
+                value={password}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                  if (error) setError("");
+                }}
+                required
+                aria-required="true"
+              />
+              {error && (
+                <p className="absolute bottom-[-24px] left-0 text-red-500 text-md">
+                  {error}
+                </p>
+              )}
+            </div>
+            <div className="m-0 flex justify-center items-center overflow-hidden h-10 md:h-[36px] md:mt-0">
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-2 px-[52px] bg-[var(--white-text-color)] text-[var(--blue-text-color)] text-lg font-bold rounded-full shadow-[inset_0_2px_20px_rgba(101,197,242,0.3)] transition hover:bg-[#cae4fa] focus:bg-[#cae4fa]"
+                className="h-[100px] bg-[var(--white-text-color)] text-[var(--blue-text-color)] text-[18px] font-bold rounded-full cursor-pointer  shadow-[inset_0_2px_20px_rgba(101,197,242,0.3)] z-30 m-0 px-3 transition-all duration-250 ease-[cubic-bezier(0.4,0,0.2,1)] md:text-[20px]  md:rounded-[200px] md:px-6 hover:bg-[#cae4fa] focus:bg-[#cae4fa] active:bg-[#cae4fa] focus-visible:bg-[#cae4fa]"
               >
                 {loading ? "Checking..." : "Enter"}
               </button>
