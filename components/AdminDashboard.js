@@ -162,7 +162,7 @@ export default function AdminDashboard({ onLogout }) {
   };
 
   return (
-    <div className="p-6 space-y-12 max-w-5xl mx-auto relative">
+    <div className="p-6 space-y-12 max-w-7xl mx-auto relative">
       <AdminTop onLogout={onLogout} />
       <div className="admin-dashboard">
         <section className="admin-testimonials">

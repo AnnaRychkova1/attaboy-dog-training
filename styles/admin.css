@@ -35,12 +35,6 @@
 .admin-list-card {
   background-color: var(--light-background);
   min-height: 182px;
-  /* TODO */
-  /* width: 50%; */
-  /* overflow-x: hidden; */
-
-  /* height: 182px; */
-  /* overflow-y: scroll; */
 }
 
 .approve-btn {
@@ -73,13 +67,10 @@
 }
 
 .admin-message {
-  /* TODO */
-  /* max-width: 398px; */
-  /* overflow-x: hidden; */
   display: block;
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 1024px) {
   .admin-dashboard {
     display: grid;
     grid-template-columns: 1fr 1fr;

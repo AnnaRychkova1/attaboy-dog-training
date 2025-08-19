@@ -36,37 +36,36 @@ export default function Contacts() {
   const validateField = (name, value) => {
     const trimmedValue = value.trim();
 
-    if ((name === "name" || name === "phone") && trimmedValue === "") {
-      const message =
-        name === "phone" ? errorMessages.phone.required : errorMessages[name];
-      setErrors((prev) => ({
-        ...prev,
-        [name]: message,
-      }));
+    if (name === "name" && trimmedValue === "") {
+      setErrors((prev) => ({ ...prev, [name]: errorMessages.name }));
       return false;
     }
 
-    if (
-      name === "email" &&
-      trimmedValue !== "" &&
-      !validations.email(trimmedValue)
-    ) {
-      setErrors((prev) => ({
-        ...prev,
-        [name]: errorMessages.email,
-      }));
-      return false;
+    if (name === "email") {
+      if (trimmedValue === "") {
+        setErrors((prev) => ({ ...prev, [name]: "Email is required." }));
+        return false;
+      } else if (!validations.email(trimmedValue)) {
+        setErrors((prev) => ({ ...prev, [name]: errorMessages.email }));
+        return false;
+      }
     }
 
-    if (
-      name === "phone" &&
-      trimmedValue !== "" &&
-      !validations.phone(trimmedValue)
-    ) {
-      setErrors((prev) => ({
-        ...prev,
-        [name]: errorMessages.phone.invalid,
-      }));
+    if (name === "phone") {
+      if (trimmedValue === "") {
+        setErrors((prev) => ({
+          ...prev,
+          [name]: errorMessages.phone.required,
+        }));
+        return false;
+      } else if (!validations.phone(trimmedValue)) {
+        setErrors((prev) => ({ ...prev, [name]: errorMessages.phone.invalid }));
+        return false;
+      }
+    }
+
+    if (name === "message" && trimmedValue === "") {
+      setErrors((prev) => ({ ...prev, [name]: errorMessages.message }));
       return false;
     }
 
@@ -155,11 +154,9 @@ export default function Contacts() {
               onChange={handleChange}
               onBlur={handleBlur}
               required
-              //aria-invalid={!!errors.name}
-              //aria-describedby={errors.name ? "name-error" : undefined}
             />
             {errors.name && (
-              <p className="absolute bottom-[-20px] left-0 text-red-500 text-base">
+              <p className="absolute bottom-[-24px] left-0 text-red-500 text-lg">
                 {errors.name}
               </p>
             )}
@@ -168,7 +165,7 @@ export default function Contacts() {
           {/* Email Field */}
           <div className="field-container relative">
             <label htmlFor="email" className="text-2xl label-shadow">
-              Email
+              Email<span className="text-red-500"> *</span>
             </label>
             <input
               id="email"
@@ -179,11 +176,10 @@ export default function Contacts() {
               value={formData.email}
               onChange={handleChange}
               onBlur={handleBlur}
-              //aria-invalid={!!errors.email}
-              //aria-describedby={errors.email ? "email-error" : undefined}
+              required
             />
             {errors.email && (
-              <p className="absolute bottom-[-20px] left-0 text-red-500 text-base">
+              <p className="absolute bottom-[-24px] left-0 text-red-500 text-lg">
                 {errors.email}
               </p>
             )}
@@ -204,11 +200,9 @@ export default function Contacts() {
               onChange={handleChange}
               onBlur={handleBlur}
               required
-              //aria-invalid={!!errors.phone}
-              //aria-describedby={errors.phone ? "phone-error" : undefined}
             />
             {errors.phone && (
-              <p className="absolute bottom-[-20px] left-0 text-red-500 text-base">
+              <p className="absolute bottom-[-24px] left-0 text-red-500 text-lg">
                 {errors.phone}
               </p>
             )}
@@ -252,7 +246,6 @@ export default function Contacts() {
               Send
             </button>
           </a>
-          {/* </div> */}
         </form>
 
         {/* Modal */}
