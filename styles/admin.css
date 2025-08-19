@@ -35,6 +35,10 @@
 .admin-list-card {
   background-color: var(--light-background);
   min-height: 182px;
+  word-wrap: break-word;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  max-width: 100%;
 }
 
 .approve-btn {

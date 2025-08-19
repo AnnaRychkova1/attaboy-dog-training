@@ -1,11 +1,17 @@
 import { NextResponse } from "next/server";
-import { createClient } from "@supabase/supabase-js";
+import admin from "firebase-admin";
 import { cookies } from "next/headers";
 
-const supabase = createClient(
-  process.env.SUPABASE_URL,
-  process.env.SUPABASE_SERVICE_ROLE_KEY
-);
+if (!admin.apps.length) {
+  admin.initializeApp({
+    credential: admin.credential.cert({
+      projectId: process.env.FIREBASE_PROJECT_ID,
+      clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
+      privateKey: process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, "\n"),
+    }),
+  });
+}
+const db = admin.firestore();
 
 async function isAdminRequest() {
   const cookieStore = await cookies();
@@ -17,23 +23,24 @@ export async function PUT(req, context) {
   if (!(await isAdminRequest())) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
-  const { params } = context;
-  const resolvedParams = await params;
-  const id = resolvedParams.id;
+
+  const { id } = await context.params;
 
   try {
     const updates = await req.json();
 
-    const { data, error } = await supabase
-      .from("contacts")
-      .update(updates)
-      .eq("id", id)
-      .select()
-      .single();
+    const docRef = db.collection("contacts").doc(id);
+    await docRef.update({
+      ...updates,
+      updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+    });
 
-    if (error) throw error;
+    const updatedDoc = await docRef.get();
+    if (!updatedDoc.exists) {
+      return NextResponse.json({ error: "Not found" }, { status: 404 });
+    }
 
-    return NextResponse.json(data);
+    return NextResponse.json({ id: updatedDoc.id, ...updatedDoc.data() });
   } catch (error) {
     console.error("Update contact error:", error);
     return NextResponse.json(
@@ -48,14 +55,17 @@ export async function DELETE(req, context) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const { params } = context;
-  const resolvedParams = await params;
-  const id = resolvedParams.id;
+  const { id } = await context.params;
 
   try {
-    const { error } = await supabase.from("contacts").delete().eq("id", id);
-    if (error) throw error;
+    const docRef = db.collection("contacts").doc(id);
+    const docSnap = await docRef.get();
 
+    if (!docSnap.exists) {
+      return NextResponse.json({ error: "Not found" }, { status: 404 });
+    }
+
+    await docRef.delete();
     return NextResponse.json({ message: "Contact deleted" });
   } catch (error) {
     console.error("Delete contact error:", error);

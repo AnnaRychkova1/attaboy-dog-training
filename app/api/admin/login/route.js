@@ -4,7 +4,7 @@ export async function POST(req) {
   const { password } = await req.json();
 
   if (password === process.env.ADMIN_PASSWORD) {
-    const cookieStore = cookies();
+    const cookieStore = await cookies();
     cookieStore.set("isAdmin", "true", {
       httpOnly: true,
       sameSite: "lax",

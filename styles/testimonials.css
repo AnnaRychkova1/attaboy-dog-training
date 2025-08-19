@@ -55,6 +55,18 @@
 
 .testimonial-modal {
   background-color: rgba(95, 131, 166, 0.8);
+  overflow-y: auto;
+}
+
+.testimonial-modal > div {
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.testimonial-wrapper {
+  background-color: var(--light-background);
+  border-radius: 1rem;
+  max-height: 90vh;
+  overflow-y: auto;
 }
 
 .swiper {
@@ -104,4 +116,20 @@
   .testimonial-text {
     font-size: 1.5rem;
   }
+}
+
+/* Chrome, Edge, Safari */
+.testimonial-wrapper::-webkit-scrollbar {
+  width: 8px;
+}
+
+.testimonial-wrapper::-webkit-scrollbar-track {
+  background: var(--light-background);
+  border-radius: 4px;
+  border: 1px solid rgb(237, 237, 237);
+}
+
+.testimonial-wrapper::-webkit-scrollbar-thumb {
+  background-color: rgba(95, 131, 166, 0.6);
+  border-radius: 12px;
 }

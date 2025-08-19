@@ -1,15 +1,19 @@
 import { NextResponse } from "next/server";
-import { createClient } from "@supabase/supabase-js";
+import admin from "firebase-admin";
 import { v2 as cloudinary } from "cloudinary";
 import { cookies } from "next/headers";
 
-// Supabase client with service role
-const supabase = createClient(
-  process.env.SUPABASE_URL,
-  process.env.SUPABASE_SERVICE_ROLE_KEY
-);
+if (!admin.apps.length) {
+  admin.initializeApp({
+    credential: admin.credential.cert({
+      projectId: process.env.FIREBASE_PROJECT_ID,
+      clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
+      privateKey: process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, "\n"),
+    }),
+  });
+}
+const db = admin.firestore();
 
-// Cloudinary config
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
@@ -26,14 +30,12 @@ export async function PUT(req, context) {
   if (!(await isAdminRequest())) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
-  const { params } = context;
-  const resolvedParams = await params;
-  const id = resolvedParams.id;
+
+  const { id } = await context.params;
+  const contentType = req.headers.get("content-type");
 
   try {
-    const contentType = req.headers.get("content-type");
-    let updates = {};
-    let newImageUrl;
+    const updates = {};
 
     if (contentType?.includes("multipart/form-data")) {
       const formData = await req.formData();
@@ -49,14 +51,14 @@ export async function PUT(req, context) {
       if (imageFile instanceof File && imageFile.size > 0) {
         const buffer = Buffer.from(await imageFile.arrayBuffer());
         const base64 = buffer.toString("base64");
+        const dataUrl = `data:${imageFile.type};base64,${base64}`;
 
-        const uploadRes = await cloudinary.uploader.upload(
-          `data:${imageFile.type};base64,${base64}`,
-          { folder: "testimonials", format: "webp" }
-        );
+        const uploadRes = await cloudinary.uploader.upload(dataUrl, {
+          folder: "testimonials",
+          format: "webp",
+        });
 
-        newImageUrl = uploadRes.secure_url;
-        updates.image = newImageUrl;
+        updates.image = uploadRes.secure_url;
       }
     } else if (contentType?.includes("application/json")) {
       const body = await req.json();
@@ -71,18 +73,16 @@ export async function PUT(req, context) {
       );
     }
 
-    const { data, error } = await supabase
-      .from("testimonials")
-      .update(updates)
-      .eq("id", id)
-      .select()
-      .single();
+    const docRef = db.collection("testimonials").doc(id);
+    await docRef.update({
+      ...updates,
+      updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+    });
 
-    if (error) throw error;
-
-    return NextResponse.json(data);
-  } catch (error) {
-    console.error("Update/Approve testimonial error", error);
+    const updatedDoc = await docRef.get();
+    return NextResponse.json({ id: docRef.id, ...updatedDoc.data() });
+  } catch (err) {
+    console.error("Update testimonial error:", err);
     return NextResponse.json(
       { error: "Failed to update testimonial" },
       { status: 500 }
@@ -94,39 +94,28 @@ export async function DELETE(req, context) {
   if (!(await isAdminRequest())) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
-  const { params } = context;
-  const resolvedParams = await params;
-  const id = resolvedParams.id;
+
+  const { id } = await context.params;
 
   try {
-    const { data: testimonial, error: fetchError } = await supabase
-      .from("testimonials")
-      .select("image")
-      .eq("id", id)
-      .single();
+    const docRef = db.collection("testimonials").doc(id);
+    const docSnap = await docRef.get();
 
-    if (fetchError) throw fetchError;
+    if (!docSnap.exists) {
+      return NextResponse.json({ error: "Not found" }, { status: 404 });
+    }
 
-    if (testimonial?.image) {
-      const publicId = testimonial.image
-        .split("/")
-        .slice(-2)
-        .join("/")
-        .split(".")[0];
+    const data = docSnap.data();
 
+    if (data?.image) {
+      const publicId = data.image.split("/").slice(-2).join("/").split(".")[0];
       await cloudinary.uploader.destroy(publicId);
     }
 
-    const { error: deleteError } = await supabase
-      .from("testimonials")
-      .delete()
-      .eq("id", id);
-
-    if (deleteError) throw deleteError;
-
+    await docRef.delete();
     return NextResponse.json({ message: "Testimonial deleted" });
-  } catch (error) {
-    console.error("Delete testimonial error:", error);
+  } catch (err) {
+    console.error("Delete testimonial error:", err);
     return NextResponse.json(
       { error: "Failed to delete testimonial" },
       { status: 500 }

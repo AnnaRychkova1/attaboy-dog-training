@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import AdminDashboard from "@/components/AdminDashboard";
+import AdminDashboard from "@/components/Admin/AdminDashboard";
 
 export default function AdminPage() {
   const [authenticated, setAuthenticated] = useState(false);

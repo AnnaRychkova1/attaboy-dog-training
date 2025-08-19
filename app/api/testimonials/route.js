@@ -1,67 +1,28 @@
 import { NextResponse } from "next/server";
-import { createClient } from "@supabase/supabase-js";
+import { db } from "@/lib/firebaseAdmin";
 import { v2 as cloudinary } from "cloudinary";
+import admin from "firebase-admin";
 
-// const supabaseUrl = process.env.SUPABASE_URL || "";
-// const supabaseAnonKey = process.env.SUPABASE_ANON_KEY || "";
-// const supabase = createClient(supabaseUrl, supabaseAnonKey);
-const supabase = createClient(
-  process.env.SUPABASE_URL,
-  process.env.SUPABASE_SERVICE_ROLE_KEY
-);
-
-// Cloudinary config
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-// export async function GET() {
-//   try {
-//     const { data: testimonials, error } = await supabase
-//       .from("testimonials")
-//       .select("*")
-//       .order("createdAt", { ascending: false });
-
-//     if (error) {
-//       console.error("GET testimonials error:", error);
-//       return NextResponse.json({ error: "Server error" }, { status: 500 });
-//     }
-
-//     return NextResponse.json(testimonials);
-//   } catch (error) {
-//     console.error("GET testimonials error:", error);
-//     return NextResponse.json({ error: "Server error" }, { status: 500 });
-//   }
-// }
-
 export async function GET() {
   try {
-    console.log("Starting GET /api/testimonials");
+    const snapshot = await db
+      .collection("testimonials")
+      .orderBy("createdAt", "desc")
+      .get();
 
-    if (!process.env.SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) {
-      console.error("Missing Supabase environment variables!");
-      return NextResponse.json(
-        { error: "Server config error" },
-        { status: 500 }
-      );
-    }
-
-    const { data: testimonials, error } = await supabase
-      .from("testimonials")
-      .select("*")
-      .order("createdAt", { ascending: false });
-
-    if (error) {
-      console.error("GET testimonials Supabase error:", error);
-      return NextResponse.json({ error: "Server error" }, { status: 500 });
-    }
-
-    console.log("GET testimonials success:", testimonials.length, "items");
+    const testimonials = snapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
     return NextResponse.json(testimonials);
-  } catch (error) {
-    console.error("GET testimonials unexpected error:", error);
+  } catch (err) {
+    console.error("GET testimonials error:", err);
     return NextResponse.json({ error: "Server error" }, { status: 500 });
   }
 }
@@ -74,7 +35,8 @@ export async function POST(req) {
     const message = formData.get("message")?.toString().trim() || "";
     const imageFile = formData.get("image");
 
-    let image = "https://res.cloudinary.com/demo/image/upload/sample.webp";
+    let image =
+      "https://res.cloudinary.com/dmzsusenh/image/upload/v1749933067/testimonials/kovryquxwf54srf9d6ix.webp";
 
     if (
       imageFile instanceof File &&
@@ -98,25 +60,18 @@ export async function POST(req) {
       }
     }
 
-    const { data: newTestimonial, error } = await supabase
-      .from("testimonials")
-      .insert({
-        name,
-        message,
-        image,
-        approved: false,
-      })
-      .select()
-      .single();
+    const docRef = await db.collection("testimonials").add({
+      name,
+      message,
+      image,
+      approved: false,
+      createdAt: admin.firestore.FieldValue.serverTimestamp(),
+    });
 
-    if (error) {
-      console.error("POST testimonial error:", error);
-      return NextResponse.json({ error: "Server error" }, { status: 500 });
-    }
-
-    return NextResponse.json(newTestimonial);
-  } catch (error) {
-    console.error("POST testimonial error:", error);
+    const newTestimonial = await docRef.get();
+    return NextResponse.json({ id: docRef.id, ...newTestimonial.data() });
+  } catch (err) {
+    console.error("POST testimonial error:", err);
     return NextResponse.json({ error: "Server error" }, { status: 500 });
   }
 }

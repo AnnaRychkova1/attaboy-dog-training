@@ -48,9 +48,12 @@ export default function Testimonials() {
     setError(null);
 
     const form = new FormData();
-    form.append("name", formData.name);
+    form.append("name", formData.name?.trim() || "Grateful Customer");
     form.append("message", formData.message);
-    if (formData.image) form.append("image", formData.image);
+
+    if (formData.image) {
+      form.append("image", formData.image);
+    }
 
     try {
       const res = await fetch("/api/testimonials", {
@@ -117,98 +120,99 @@ export default function Testimonials() {
 
       {showModal && (
         <div className="testimonial-modal fixed inset-0 z-50 flex items-center justify-center bg-opacity-50">
-          <div className="bg-[var(--light-background)] rounded-xl p-6 md:p-8 w-full max-w-sm md:max-w-xl">
-            <h3 className="text-lg md:text-2xl font-bold mb-4 md:mb-8 text-[var(--blue-text-color)]">
-              Leave a testimonial
-            </h3>
-            <form onSubmit={handleSubmit} className="space-y-4 text-gray-700">
-              <div>
-                <label
-                  htmlFor="name"
-                  className="block mb-1 text-lg font-medium text-[var(--blue-text-color)]"
-                >
-                  Your Name
-                </label>
-                <input
-                  id="name"
-                  name="name"
-                  type="text"
-                  placeholder="Your name"
-                  value={formData.name}
-                  onChange={(e) =>
-                    setFormData({ ...formData, name: e.target.value })
-                  }
-                  required
-                  className="w-full input-modal"
-                />
-              </div>
+          <div className="bg-[var(--light-background)] rounded-xl p-6 md:p-8 pr-3 md:pr-4 w-full max-w-sm md:max-w-xl">
+            <div className="testimonial-wrapper pr-3 md:pr-4">
+              <h3 className="text-lg md:text-2xl font-bold mb-4 md:mb-8 text-[var(--blue-text-color)]">
+                Leave a testimonial
+              </h3>
+              <form onSubmit={handleSubmit} className="space-y-4 text-gray-700">
+                <div>
+                  <label
+                    htmlFor="name"
+                    className="block mb-1 text-lg font-medium text-[var(--blue-text-color)]"
+                  >
+                    Your Name
+                  </label>
+                  <input
+                    id="name"
+                    name="name"
+                    type="text"
+                    placeholder="Your name"
+                    value={formData.name}
+                    onChange={(e) =>
+                      setFormData({ ...formData, name: e.target.value })
+                    }
+                    className="w-full input-modal"
+                  />
+                </div>
 
-              <div>
-                <label
-                  htmlFor="message"
-                  className="block mb-1 text-lg font-medium text-[var(--blue-text-color)]"
-                >
-                  Your Message
-                </label>
-                <textarea
-                  ref={ref}
-                  id="message"
-                  name="message"
-                  placeholder="Your message"
-                  value={formData.message}
-                  onChange={(e) =>
-                    setFormData({ ...formData, message: e.target.value })
-                  }
-                  required
-                  rows={4}
-                  className="w-full input-modal textarea-modal overflow-hidden resize-none"
-                />
-              </div>
+                <div>
+                  <label
+                    htmlFor="message"
+                    className="block mb-1 text-lg font-medium text-[var(--blue-text-color)]"
+                  >
+                    Your Message
+                  </label>
+                  <textarea
+                    ref={ref}
+                    id="message"
+                    name="message"
+                    placeholder="Your message"
+                    value={formData.message}
+                    onChange={(e) =>
+                      setFormData({ ...formData, message: e.target.value })
+                    }
+                    required
+                    rows={4}
+                    className="w-full input-modal textarea-modal overflow-hidden resize-none p-3"
+                  />
+                </div>
 
-              <div>
-                <label
-                  htmlFor="image"
-                  className="block mb-1 text-lg font-medium text-[var(--blue-text-color)]"
-                >
-                  Add a photo of your pet
-                </label>
-                <input
-                  id="image"
-                  name="image"
-                  type="file"
-                  accept="image/*"
-                  onChange={(e) =>
-                    setFormData({ ...formData, image: e.target.files?.[0] })
-                  }
-                  className="w-full cursor-pointer file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-md file:font-semibold file:bg-blue-100 file:text-[var(--blue-text-color)] hover:file:bg-blue-200 input-modal"
-                />
-              </div>
+                <div>
+                  <label
+                    htmlFor="image"
+                    className="block mb-1 text-lg font-medium text-[var(--blue-text-color)]"
+                  >
+                    Add a photo of your pet
+                  </label>
+                  <input
+                    id="image"
+                    name="image"
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) =>
+                      setFormData({ ...formData, image: e.target.files?.[0] })
+                    }
+                    className="w-full cursor-pointer file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-md file:font-semibold file:bg-blue-100 file:text-[var(--blue-text-color)] hover:file:bg-blue-200 input-modal"
+                  />
+                </div>
 
-              {error && (
-                <p role="alert" className="text-red-600 text-sm font-medium">
-                  {error}
-                </p>
-              )}
+                {error && (
+                  <p role="alert" className="text-red-600 text-sm font-medium">
+                    {error}
+                  </p>
+                )}
 
-              <div className="flex justify-end gap-4 pt-2">
-                <button
-                  type="button"
-                  onClick={() => setShowModal(false)}
-                  className="text-[var(--blue-text-color)] md:text-lg font-medium hover:[background-color:#eef4fb] hover:[box-shadow:inset_0_2px_20px_rgba(101,197,242,0.3)] hover:text-cyan-700 px-6 py-2 rounded-full transition"
-                >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className={`${
-                    isSubmitting ? "opacity-50 cursor-not-allowed" : ""
-                  } bg-[var(--blue-text-color)] text-[var(--bright-text-color)] md:text-lg font-medium px-6 py-2 rounded-full hover:[background-color:#eef4fb] hover:[box-shadow:inset_0_2px_20px_rgba(101,197,242,0.3)] hover:text-cyan-700 transition`}
-                >
-                  {isSubmitting ? "Submitting..." : "Submit"}
-                </button>
-              </div>
-            </form>
+                <div className="flex justify-end gap-4 pt-2">
+                  <button
+                    type="button"
+                    onClick={() => setShowModal(false)}
+                    className="text-[var(--blue-text-color)] md:text-lg font-medium hover:[background-color:#eef4fb] hover:[box-shadow:inset_0_2px_20px_rgba(101,197,242,0.3)] hover:text-cyan-700 px-6 py-2 rounded-full transition"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className={`${
+                      isSubmitting ? "opacity-50 cursor-not-allowed" : ""
+                    } bg-[var(--blue-text-color)] text-[var(--bright-text-color)] md:text-lg font-medium px-6 py-2 rounded-full hover:[background-color:#eef4fb] hover:[box-shadow:inset_0_2px_20px_rgba(101,197,242,0.3)] hover:text-cyan-700 transition`}
+                  >
+                    {isSubmitting ? "Submitting..." : "Submit"}
+                  </button>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
       )}
