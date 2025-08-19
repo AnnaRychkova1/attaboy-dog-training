@@ -93,7 +93,7 @@ export async function POST(req) {
         </tr>
         <tr>
           <td colspan="2" style="background:#f9fafb; padding:15px; text-align:center; color:#64748b; font-size:12px;">
-            © ${new Date().getFullYear()} Attaboy Dog Training · 
+            &copy; ${new Date().getFullYear()} Attaboy Dog Training · 
             <a href="https://attaboy-dog-training.vercel.app" style="color:#1e40af; text-decoration:none;">Visit our website</a>
           </td>
         </tr>
@@ -119,7 +119,7 @@ export async function POST(req) {
           </td>
           <td style="padding:20px; text-align:left; vertical-align:middle;">
             <h2 style="color:#fffdee; margin:0; font-size:18px; font-weight:500; text-align:center;">
-              We&apos;ve received your message
+              We&apos;ve received your message!
             </h2>
           </td>
         </tr>
@@ -127,8 +127,8 @@ export async function POST(req) {
         <tr >
           <td colspan="2" style="padding:0 20px 20px 20px; color:#334155; font-size:15px; line-height:1.6;">
             <p>Hi ${name || "there"},</p>
-            <p>Thank you for reaching out to <strong>Attaboy Dog Training</strong>! 
-               We&apos;ll get back to you as soon as possible.</p>
+            <p>Thank you for reaching out to <strong>Attaboy Dog Training</strong>!</p>
+            <p>We&apos;ll get back to you as soon as possible.</p>
             <p>Here&apos;s a copy of your message:</p>
             <blockquote style="border-left:3px solid #ccc; padding-left:10px; margin:15px 0; color:#475569;">
               ${message}
@@ -138,7 +138,7 @@ export async function POST(req) {
         </tr>
         <tr>
           <td colspan="2" style="background:#f9fafb; padding:15px; text-align:center; color:#64748b; font-size:12px;">
-            © ${new Date().getFullYear()} Attaboy Dog Training · 
+            &copy; ${new Date().getFullYear()} Attaboy Dog Training · 
             <a href="https://attaboy-dog-training.vercel.app" style="color:#1e40af; text-decoration:none;">Visit our website</a>
           </td>
         </tr>

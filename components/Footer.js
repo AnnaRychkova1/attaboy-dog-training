@@ -11,7 +11,7 @@ export default function Footer() {
           className="px-4"
         >
           <Image
-            src="/Instagram_icon.png"
+            src="/instagram-icon.png"
             alt="Link to Attaboy Dog Training Instagram page"
             width={64}
             height={64}
@@ -55,7 +55,8 @@ export default function Footer() {
             </li>
           </ul>
           <span className="text-sm 2xl:text-lg text-white/80 md:text-end">
-            &copy; 2024 Attaboy Dog Training. All rights reserved.
+            &copy; {new Date().getFullYear()} Attaboy Dog Training. All rights
+            reserved.
           </span>
         </div>
       </div>

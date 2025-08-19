@@ -28,9 +28,10 @@ export default function Header() {
           <Image
             src="/logo.png"
             alt="Logo Attaboy Dog Training"
-            width={88}
-            height={88}
+            width={160}
+            height={160}
             loading="lazy"
+            className="h-18 w-18 sm:h-20 sm:w-20"
           />
         </a>
 

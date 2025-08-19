@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { getCookie, setCookie, deleteCookie } from "cookies-next";
 import AdminDashboard from "@/components/AdminDashboard";
 
 export default function AdminPage() {
@@ -8,14 +9,64 @@ export default function AdminPage() {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
+  // useEffect(() => {
+  //   const authCookie = getCookie("adminAuthenticated");
+  //   if (authCookie === "true") setAuthenticated(true);
+  // }, []);
+
+  // const handleLogout = () => {
+  //   setAuthenticated(false);
+  //   deleteCookie("adminAuthenticated");
+  // };
+
+  // const handleLogin = async () => {
+  //   setLoading(true);
+  //   try {
+  //     const res = await fetch("/api/admin/login", {
+  //       method: "POST",
+  //       headers: { "Content-Type": "application/json" },
+  //       body: JSON.stringify({ password }),
+  //     });
+
+  //     const result = await res.json();
+  //     if (result.success) {
+  //       setAuthenticated(true);
+  //       setCookie("adminAuthenticated", "true", { maxAge: 60 * 60 * 24 }); // 1 day
+  //     } else {
+  //       alert("Incorrect password");
+  //     }
+  //   } catch (err) {
+  //     console.error("Login error:", err);
+  //     alert("Something went wrong");
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        const res = await fetch("/api/admin/check");
+        const data = await res.json();
+        if (data.authenticated) setAuthenticated(true);
+      } catch (err) {
+        console.error("Auth check error:", err);
+      }
+    };
+    checkAuth();
+  }, []);
+
+  const handleLogout = async () => {
+    await fetch("/api/admin/logout", { method: "POST" });
+    setAuthenticated(false);
+  };
+
   const handleLogin = async () => {
     setLoading(true);
     try {
       const res = await fetch("/api/admin/login", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ password }),
       });
 
@@ -77,5 +128,5 @@ export default function AdminPage() {
     );
   }
 
-  return <AdminDashboard onLogout={() => setAuthenticated(false)} />;
+  return <AdminDashboard onLogout={handleLogout} />;
 }
