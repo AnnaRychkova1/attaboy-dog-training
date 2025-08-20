@@ -25,7 +25,9 @@ export default function TestimonialCard({ name, message, image }) {
     <>
       <Image
         src={imgSrc}
-        alt={`Testimonial of ${name || "Grateful Customer"}`}
+        alt={`Dog training testimonial from ${
+          name || "a customer"
+        } in Dublin, Ireland`}
         width={300}
         height={300}
         className="tw-[300px] h-[300px] mx-auto rounded-full mb-8 object-cover"

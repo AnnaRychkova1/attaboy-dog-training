@@ -110,7 +110,7 @@ export default function Services() {
                       <source srcSet={service.imageWebp} type="image/webp" />
                       <img
                         src={service.image}
-                        alt={service.title}
+                        alt={`${service.title} in Dublin, Ireland`}
                         className="services-img"
                         loading="lazy"
                       />

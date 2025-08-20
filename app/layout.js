@@ -14,10 +14,40 @@ const dmSans = DM_Sans({
 });
 
 export const metadata = {
-  title: "Attaboy Dog Training",
-  description: "Anything is paw-sible 🐾",
+  title: "Dog Training in Dublin, Ireland. Professional Dog Training Services",
+  description:
+    "Professional dog training in Dublin, Ireland. Positive reinforcement, obedience lessons, puppy training, and behavior solutions. Anything is paw-sible 🐾",
+  keywords: [
+    "dog training",
+    "puppy obedience",
+    "positive reinforcement",
+    "Attaboy Dog Training",
+  ],
+  authors: [{ name: "Attaboy Dog Training" }],
   icons: {
     icon: "/favicon.png",
+  },
+  openGraph: {
+    title: "Attaboy Dog Training",
+    description: "Anything is paw-sible 🐾",
+    url: "https://attaboydogtraining.ie",
+    siteName: "Attaboy Dog Training",
+    images: [
+      {
+        url: "https://attaboydogtraining.ie/logo-transparent.png",
+        width: 1200,
+        height: 600,
+        alt: "Dog Training with Attaboy",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Attaboy Dog Training",
+    description: "Anything is paw-sible 🐾",
+    images: ["https://attaboydogtraining.ie/logo-transparent.png"],
   },
 };
 
