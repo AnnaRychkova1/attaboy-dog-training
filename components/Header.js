@@ -36,12 +36,14 @@ export default function Header() {
         </a>
 
         {/* Desktop Nav */}
-        <nav className="hidden md:flex gap-6 text-lg 2xl:text-2xl font-medium">
-          <NavLink href="#hero" text="Home" />
-          <NavLink href="#about" text="About" />
-          <NavLink href="#services" text="Services" />
-          <NavLink href="#testimonials" text="Testimonials" />
-          <NavLink href="#contacts" text="Contacts" />
+        <nav className="hidden md:block text-lg 2xl:text-2xl font-medium">
+          <ul className="flex gap-6 list-none">
+            <NavLink href="#hero" text="Home" />
+            <NavLink href="#about" text="About" />
+            <NavLink href="#services" text="Services" />
+            <NavLink href="#testimonials" text="Testimonials" />
+            <NavLink href="#contacts" text="Contacts" />
+          </ul>
         </nav>
 
         {/* Mobile Toggle */}
@@ -69,13 +71,13 @@ export default function Header() {
       {/* Mobile Nav */}
       {isMobileMenuOpen && (
         <div className="md:hidden px-4 pb-4">
-          <div className="flex flex-col gap-0 text-lg font-medium items-end">
+          <ul className="flex flex-col gap-0 text-lg font-medium items-end list-none">
             <NavLink href="#hero" text="Home" isMobile />
             <NavLink href="#about" text="About" isMobile />
             <NavLink href="#services" text="Services" isMobile />
             <NavLink href="#testimonials" text="Testimonials" isMobile />
             <NavLink href="#contacts" text="Contacts" isMobile />
-          </div>
+          </ul>
         </div>
       )}
     </header>
