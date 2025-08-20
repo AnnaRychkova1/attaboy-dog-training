@@ -1,36 +1,64 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Attaboy Dog Training
 
-## Getting Started
+Official website and admin panel for **Attaboy Dog Training**, built with **Next.js 15**, **Firebase Admin**, **Cloudinary**, **TailwindCSS**, and **Nodemailer**.
 
-First, run the development server:
+This project provides:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- Public-facing website with testimonials and contact form.
+- Admin dashboard to manage contacts and testimonials.
+- Email notifications for new contact submissions.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Table of Contents
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- [Demo](#demo)
+- [Tech Stack](#tech-stack)
+- [Features](#features)
+- [License](#license)
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## Demo
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+[Live site](https://attaboy-dog-training.vercel.app/)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## Tech Stack
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Next.js 15** – React framework for server-side rendering
+- **React 19** – Frontend library
+- **Firebase Admin** – Firestore database for storing contacts and testimonials
+- **Cloudinary** – Image hosting and transformation
+- **TailwindCSS 4** – Styling
+- **Nodemailer** – Sending contact form emails
+- **Swiper** – Slider for testimonials
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## Features
+
+### Admin Dashboard
+
+- Edit, approve, and delete testimonials
+- Mark contacts as contacted
+
+### Public Site
+
+- Display testimonials
+- Contact form with email notifications
+
+### Cloudinary Integration
+
+- Upload and transform images for testimonials
+
+### Firebase Firestore
+
+- Stores contact form submissions and testimonials
+
+---
+
+## License
+
+This project is private and not open-source.
