@@ -2,26 +2,28 @@
 
 Official website and admin panel for **Attaboy Dog Training**, built with **Next.js 15**, **Firebase Admin**, **Cloudinary**, **TailwindCSS**, and **Nodemailer**.
 
-This project provides:
+This project is designed to help **grow and promote a dog training business**, providing:
 
-- Public-facing website with testimonials and contact form.
-- Admin dashboard to manage contacts and testimonials.
-- Email notifications for new contact submissions.
+- A public-facing site to showcase testimonials and services.
+- A contact form with email notifications for new inquiries.
+- An admin dashboard to manage customer contacts and testimonials efficiently.
+
+**Owner:** [![Instagram](https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png)](https://www.instagram.com/attaboy_dogtraining/)
 
 ---
 
 ## Table of Contents
 
-- [Demo](#demo)
+- [Live Site](#live-site)
 - [Tech Stack](#tech-stack)
 - [Features](#features)
 - [License](#license)
 
 ---
 
-## Demo
+## Live Site
 
-[Live site](https://attaboy-dog-training.vercel.app/)
+[Visit Attaboy Dog Training](https://attaboy-dog-training.vercel.app/)
 
 ---
 
