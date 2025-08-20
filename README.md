@@ -8,10 +8,9 @@ This project is designed to help **grow and promote a dog training business**, p
 - A contact form with email notifications for new inquiries.
 - An admin dashboard to manage customer contacts and testimonials efficiently.
 
-**Owner:** [Attaboy Dog Training](https://www.instagram.com/attaboy_dogtraining/)<br/>
-<a href="https://www.instagram.com/attaboy_dogtraining/" target="_blank" style="display:inline-flex; align-items:center; gap:4px; text-decoration:none;">
-Attaboy Dog Training
-<img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" width="24" height="24" style="margin-top:4px;"/>
+**Owner:**  [Attaboy Dog Training](https://www.instagram.com/attaboy_dogtraining/)
+<a href="https://www.instagram.com/attaboy_dogtraining/" target="_blank"> 
+  <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" width="24" height="24"/>
 </a>
 
 ---
