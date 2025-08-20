@@ -69,13 +69,13 @@ export default function Header() {
       {/* Mobile Nav */}
       {isMobileMenuOpen && (
         <div className="md:hidden px-4 pb-4">
-          <ul className="flex flex-col gap-2 text-lg font-medium items-end">
+          <div className="flex flex-col gap-0 text-lg font-medium items-end">
             <NavLink href="#hero" text="Home" isMobile />
             <NavLink href="#about" text="About" isMobile />
             <NavLink href="#services" text="Services" isMobile />
             <NavLink href="#testimonials" text="Testimonials" isMobile />
             <NavLink href="#contacts" text="Contacts" isMobile />
-          </ul>
+          </div>
         </div>
       )}
     </header>

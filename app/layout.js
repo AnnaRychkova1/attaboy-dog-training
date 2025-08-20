@@ -28,8 +28,10 @@ export const metadata = {
     icon: "/favicon.png",
   },
   openGraph: {
-    title: "Attaboy Dog Training",
-    description: "Anything is paw-sible 🐾",
+    title:
+      "Dog Training in Dublin, Ireland. Professional Dog Training Services",
+    description:
+      "Professional dog training in Dublin, Ireland. Positive reinforcement, obedience lessons, puppy training, and behavior solutions. Anything is paw-sible 🐾",
     url: "https://attaboydogtraining.ie",
     siteName: "Attaboy Dog Training",
     images: [
@@ -45,8 +47,10 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Attaboy Dog Training",
-    description: "Anything is paw-sible 🐾",
+    title:
+      "Dog Training in Dublin, Ireland. Professional Dog Training Services",
+    description:
+      "Professional dog training in Dublin, Ireland. Positive reinforcement, obedience lessons, puppy training, and behavior solutions. Anything is paw-sible 🐾",
     images: ["https://attaboydogtraining.ie/logo-transparent.png"],
   },
 };
