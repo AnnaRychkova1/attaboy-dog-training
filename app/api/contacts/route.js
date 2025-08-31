@@ -68,7 +68,7 @@ export async function POST(req) {
                 style="max-width:600px; margin:auto; background:#ffffff; border-radius:12px; overflow:hidden; box-shadow:0 4px 12px rgba(0,0,0,0.1);">
             <tr style="background:#5f83a6;">
               <td style="padding:20px; width:70px; vertical-align:middle;">
-                <img src="https://attaboy-dog-training.vercel.app/logo.png" 
+                <img src="https://attaboydogtraining.ie/logo.png" 
                     alt="Attaboy Dog Training" 
                     width="50" 
                     style="display:block; margin:auto;" />
@@ -98,7 +98,7 @@ export async function POST(req) {
             <tr>
               <td colspan="2" style="background:#f9fafb; padding:15px; text-align:center; color:#64748b; font-size:12px;">
                 &copy; ${new Date().getFullYear()} Attaboy Dog Training · 
-                <a href="https://attaboy-dog-training.vercel.app" style="color:#1e40af; text-decoration:none;">Visit our website</a>
+                <a href="https://attaboydogtraining.ie" style="color:#1e40af; text-decoration:none;">Visit our website</a>
               </td>
             </tr>
           </table>
@@ -116,7 +116,7 @@ export async function POST(req) {
                 style="max-width:600px; margin:auto; background:#ffffff; border-radius:12px; overflow:hidden; box-shadow:0 4px 12px rgba(0,0,0,0.1);">
             <tr style="background:#5f83a6;">
               <td style="padding:20px; width:70px; vertical-align:middle;">
-                <img src="https://attaboy-dog-training.vercel.app/logo.png" 
+                <img src="https://attaboydogtraining.ie/logo.png" 
                     alt="Attaboy Dog Training" 
                     width="50" 
                     style="display:block; margin:auto;" />
@@ -142,7 +142,7 @@ export async function POST(req) {
             <tr>
               <td colspan="2" style="background:#f9fafb; padding:15px; text-align:center; color:#64748b; font-size:12px;">
                 &copy; ${new Date().getFullYear()} Attaboy Dog Training · 
-                <a href="https://attaboy-dog-training.vercel.app" style="color:#1e40af; text-decoration:none;">Visit our website</a>
+                <a href="https://attaboydogtraining.ie" style="color:#1e40af; text-decoration:none;">Visit our website</a>
               </td>
             </tr>
           </table>
