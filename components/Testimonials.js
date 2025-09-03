@@ -119,7 +119,14 @@ export default function Testimonials() {
       </section>
 
       {showModal && (
-        <div className="testimonial-modal fixed inset-0 z-50 flex items-center justify-center bg-opacity-50">
+        <div
+          className="testimonial-modal fixed inset-0 z-50 flex items-center justify-center bg-opacity-50"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) {
+              setShowModal(false);
+            }
+          }}
+        >
           <div className="bg-[var(--light-background)] rounded-xl p-6 md:p-8 pr-3 md:pr-4 w-full max-w-sm md:max-w-xl">
             <div className="testimonial-wrapper pr-3 md:pr-4">
               <h3 className="text-lg md:text-2xl font-bold mb-4 md:mb-8 text-[var(--blue-text-color)]">
@@ -218,7 +225,14 @@ export default function Testimonials() {
       )}
 
       {showSuccessModal && (
-        <div className="submit-modal fixed inset-0 flex items-center justify-center bg-opacity-50 z-50">
+        <div
+          className="submit-modal fixed inset-0 flex items-center justify-center bg-opacity-50 z-50"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) {
+              setShowSuccessModal(false);
+            }
+          }}
+        >
           <div className="bg-[var(--light-background)] rounded-xl p-6 max-w-sm w-full text-center shadow-xl">
             <h3 className="text-xl font-bold text-[var(--accent-color)]">
               Thank you!
