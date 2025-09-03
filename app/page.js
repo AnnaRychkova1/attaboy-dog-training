@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import ScrollToTopButton from "@/components/ScrollToTopButton";
 import Services from "@/components/Services";
+import SmoothScroll from "@/components/SmoothScroll";
 import Testimonials from "@/components/Testimonials";
 
 export default function Home() {
@@ -20,6 +21,7 @@ export default function Home() {
       </main>
       <Footer />
       <ScrollToTopButton />
+      <SmoothScroll />
     </>
   );
 }

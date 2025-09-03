@@ -40,7 +40,7 @@ export default function TestimonialCard({ name, message, image }) {
           className={`transition-all duration-300 ease-in-out ${
             expanded
               ? "max-h-[2000px] overflow-auto"
-              : "line-clamp-12 overflow-hidden"
+              : "line-clamp-10 overflow-hidden"
           }`}
         >
           <p className="testimonial-text">{message}</p>

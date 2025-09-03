@@ -1,9 +1,17 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function Services() {
-  const [expanded, setExpanded] = useState(null);
+  const [expanded, setExpanded] = useState([]);
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => setIsDesktop(window.innerWidth >= 768);
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const services = [
     {
@@ -83,7 +91,9 @@ export default function Services() {
   ];
 
   const toggleExpand = (id) => {
-    setExpanded((prev) => (prev === id ? null : id));
+    if (!isDesktop) {
+      setExpanded((prev) => (prev.includes(id) ? prev : [...prev, id]));
+    }
   };
 
   return (
@@ -99,46 +109,53 @@ export default function Services() {
       <section>
         <div className="container services-info">
           <ul className="service-list">
-            {services.map((service) => (
-              <li key={service.id} className="service-item">
-                <div
-                  className="cursor-pointer md:cursor-default"
-                  onClick={() => toggleExpand(service.id)}
-                >
-                  <figure className="services-figure">
-                    <picture>
-                      <source srcSet={service.imageWebp} type="image/webp" />
-                      <img
-                        src={service.image}
-                        alt={`${service.title} in Dublin, Ireland`}
-                        className="services-img"
-                        loading="lazy"
-                      />
-                    </picture>
-                  </figure>
-                  <h3 className="services-subtitle text-[var(--accent-color)] m-4 text-center">
-                    {expanded ? (
-                      <a
-                        href="#contacts"
-                        className="hover:underline hover:drop-shadow-[0_2px_4px_rgba(246,92,115,0.3)] transition"
-                      >
-                        {service.title}
-                      </a>
-                    ) : (
-                      <>{service.title}</>
-                    )}
-                  </h3>
-                </div>
-                {/* Desktop view: always show; Mobile view: toggle */}
-                <div
-                  className={`p-6 pt-0 ${
-                    expanded === service.id ? "block" : "hidden"
-                  } md:block`}
-                >
-                  {service.content}
-                </div>
-              </li>
-            ))}
+            {services.map((service) => {
+              const isExpanded = isDesktop || expanded.includes(service.id);
+              return (
+                <li key={service.id} className="service-item">
+                  <div
+                    className="cursor-pointer md:cursor-default"
+                    onClick={() => toggleExpand(service.id)}
+                  >
+                    <figure className="services-figure">
+                      <picture>
+                        <source srcSet={service.imageWebp} type="image/webp" />
+                        <img
+                          src={service.image}
+                          alt={`${service.title} in Dublin, Ireland`}
+                          className="services-img"
+                          loading="lazy"
+                        />
+                      </picture>
+                    </figure>
+                    <h3 className="services-subtitle text-[var(--accent-color)] m-4 text-center">
+                      {isExpanded ? (
+                        <a
+                          href="#contacts"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setExpanded([]);
+                          }}
+                          className="underline md:no-underline md:hover:underline  hover:drop-shadow-[0_2px_4px_rgba(246,92,115,0.3)] active:underline active:drop-shadow-[0_2px_4px_rgba(246,92,115,0.3)] transition-all duration-300"
+                        >
+                          {service.title}
+                        </a>
+                      ) : (
+                        <>{service.title}</>
+                      )}
+                    </h3>
+                  </div>
+                  {/* Desktop view: always show; Mobile view: toggle */}
+                  <div
+                    className={`px-6 overflow-hidden transition-all duration-500 ease-in-out ${
+                      isExpanded ? "max-h-[1000px] pb-6 pt-0" : "max-h-0"
+                    } md:block`}
+                  >
+                    {service.content}
+                  </div>
+                </li>
+              );
+            })}
           </ul>
         </div>
       </section>

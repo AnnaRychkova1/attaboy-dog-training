@@ -1,11 +1,12 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 
 export default function Header() {
-  const [isMobileMenuOpen, setIsMobileMenuMenuOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isBlurred, setIsBlurred] = useState(false);
+  const menuRef = useRef(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -16,6 +17,18 @@ export default function Header() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setIsMobileMenuOpen(false);
+      }
+    }
+    if (isMobileMenuOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [isMobileMenuOpen, menuRef]);
 
   return (
     <header
@@ -48,8 +61,8 @@ export default function Header() {
 
         {/* Mobile Toggle */}
         <button
-          onClick={() => setIsMobileMenuMenuOpen(!isMobileMenuOpen)}
-          className="md:hidden text-[var(--accent-color)] focus:outline-none px-4"
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          className="md:hidden text-[var(--accent-color)] focus:outline-none px-4 transition-transform duration-200 active:scale-110"
           aria-label="Toggle navigation"
         >
           <svg
@@ -70,13 +83,38 @@ export default function Header() {
 
       {/* Mobile Nav */}
       {isMobileMenuOpen && (
-        <div className="md:hidden px-4 pb-4">
+        <div ref={menuRef} className="md:hidden px-4 pb-4">
           <ul className="flex flex-col gap-0 text-lg font-medium items-end list-none">
-            <NavLink href="#hero" text="Home" isMobile />
-            <NavLink href="#about" text="About" isMobile />
-            <NavLink href="#services" text="Services" isMobile />
-            <NavLink href="#testimonials" text="Testimonials" isMobile />
-            <NavLink href="#contacts" text="Contacts" isMobile />
+            <NavLink
+              href="#hero"
+              text="Home"
+              isMobile
+              onClick={() => setIsMobileMenuOpen(false)}
+            />
+            <NavLink
+              href="#about"
+              text="About"
+              isMobile
+              onClick={() => setIsMobileMenuOpen(false)}
+            />
+            <NavLink
+              href="#services"
+              text="Services"
+              isMobile
+              onClick={() => setIsMobileMenuOpen(false)}
+            />
+            <NavLink
+              href="#testimonials"
+              text="Testimonials"
+              isMobile
+              onClick={() => setIsMobileMenuOpen(false)}
+            />
+            <NavLink
+              href="#contacts"
+              text="Contacts"
+              isMobile
+              onClick={() => setIsMobileMenuOpen(false)}
+            />
           </ul>
         </div>
       )}
@@ -84,11 +122,12 @@ export default function Header() {
   );
 }
 
-function NavLink({ href, text, isMobile = false }) {
+function NavLink({ href, text, isMobile = false, onClick }) {
   return (
-    <li className="list-none">
+    <li className="list-none w-full text-right">
       <a
         href={href}
+        onClick={onClick}
         className={`px-4 py-2 rounded-full hover:text-[var(--accent-color)] hover:drop-shadow-[0_2px_4px_rgba(246,92,115,0.7)] transition ${
           isMobile ? "block" : ""
         }`}
